@@ -138,7 +138,7 @@ app.post('/newChallenges', async (req, res) => {
     picture,
     result
   } = req.body;
-  
+
   const {
     userId
   } = req.body;
@@ -173,8 +173,8 @@ app.post('/newChallenges', async (req, res) => {
       challengeId,
       userId
     });
-    
-    
+
+
   } catch (error) {
     console.error('Erreur lors de la création du challenge:', error);
     res.status(500).json({
@@ -185,15 +185,19 @@ app.post('/newChallenges', async (req, res) => {
 
 
 
-        
+
 app.delete('/deleteChallenge/:challengeId', async (req, res) => {
-  const { challengeId } = req.params;
+  const {
+    challengeId
+  } = req.params;
 
   try {
     const deletedChallenge = await client
       .db('August-web2')
       .collection('challenges')
-      .findOneAndDelete({ challengeId });
+      .findOneAndDelete({
+        challengeId
+      });
 
     if (!deletedChallenge.value) {
       return res.status(400).json({
@@ -217,16 +221,22 @@ app.delete('/deleteChallenge/:challengeId', async (req, res) => {
 
 
 app.get('/my-challenges', async (req, res) => {
-  const { userId } = req.query;
+  const {
+    userId
+  } = req.query;
 
   try {
     const challenges = await client
       .db('August-web2')
       .collection('challenges')
-      .find({ userId })
+      .find({
+        userId
+      })
       .toArray();
 
-    res.status(200).json({ challenges });
+    res.status(200).json({
+      challenges
+    });
   } catch (error) {
     console.error('Erreur lors de la récupération des challenges de l\'utilisateur:', error);
     res.status(500).json({
@@ -234,6 +244,40 @@ app.get('/my-challenges', async (req, res) => {
     });
   }
 });
+
+
+
+
+app.get('/challenges/:challengeId', async (req, res) => {
+  const {
+    challengeId
+  } = req.params;
+
+  try {
+    const challenge = await client
+      .db('August-web2')
+      .collection('challenges')
+      .findOne({
+        challengeId
+      });
+
+    if (!challenge) {
+      return res.status(404).json({
+        message: 'Défi introuvable'
+      });
+    }
+
+    res.status(200).json(challenge);
+  } catch (error) {
+    console.error('Erreur lors de la récupération du défi:', error);
+    res.status(500).json({
+      message: 'Une erreur est survenue lors de la récupération du défi'
+    });
+  }
+});
+
+
+
 
 app.get('/all-challenges', async (req, res) => {
   try {
@@ -243,7 +287,9 @@ app.get('/all-challenges', async (req, res) => {
       .find({})
       .toArray();
 
-    res.status(200).json({ challenges });
+    res.status(200).json({
+      challenges
+    });
   } catch (error) {
     console.error('Erreur lors de la récupération de tous les challenges:', error);
     res.status(500).json({
