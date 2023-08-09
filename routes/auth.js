@@ -17,10 +17,14 @@ app.use(express.json());
 router.use(cors());
 
 const uri = process.env.MONGODB_URI;
+
+
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+
 
 client.connect((err) => {
   if (err) {
@@ -218,7 +222,7 @@ app.delete('/deleteChallenge/:challengeId', async (req, res) => {
 });
 
 
-
+app.()
 
 app.get('/my-challenges', async (req, res) => {
   const {
@@ -244,7 +248,6 @@ app.get('/my-challenges', async (req, res) => {
     });
   }
 });
-
 
 
 
