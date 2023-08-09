@@ -222,7 +222,7 @@ app.delete('/deleteChallenge/:challengeId', async (req, res) => {
 });
 
 
-app.()
+
 
 app.get('/my-challenges', async (req, res) => {
   const {
