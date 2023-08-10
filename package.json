@@ -20,5 +20,9 @@
     "node-fetch": "^3.3.2",
     "unsplash-js": "^7.0.18",
     "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": "14.20.1"
   }
+
 }
