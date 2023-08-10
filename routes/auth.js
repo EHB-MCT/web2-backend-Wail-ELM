@@ -9,6 +9,7 @@ const {
 const {
   v4: uuidv4
 } = require('uuid');
+const bcryptjs = require('bcryptjs');
 const router = express.Router();
 require('dotenv').config();
 const app = express();
@@ -76,7 +77,7 @@ app.post('/register', async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
     const userId = uuidv4();
 
     await client.db('August-web2').collection('users').insertOne({
@@ -118,7 +119,7 @@ app.post('/login', async (req, res) => {
       });
     }
 
-    const passwordMatch = await bcrypt.compare(password, existingUser.password);
+    const passwordMatch = await bcryptjs.compare(password, existingUser.password);
     if (!passwordMatch) {
       return res.status(400).json({
         message: 'Adresse e-mail ou mot de passe incorrect'
