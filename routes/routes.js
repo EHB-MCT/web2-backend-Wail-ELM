@@ -37,10 +37,10 @@ client.connect((err) => {
   console.log('Connecté à la base de données MongoDB');
 });
 
-
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.status(300).redirect('./index.html');
+  res.status(300).redirect('/index.html');
 });
 
 
