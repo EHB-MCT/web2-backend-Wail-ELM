@@ -40,7 +40,7 @@ client.connect((err) => {
 
 
 app.get('/', (req, res) => {
-  res.status(300).redirect('./index.html)');
+  res.status(300).redirect('./index.html');
 });
 
 
