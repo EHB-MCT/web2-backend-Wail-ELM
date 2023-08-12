@@ -1,8 +1,7 @@
-
-const cors = require('cors');
 const express = require('express');
-app.use(cors()); 
 const app = express();
+const cors = require('cors');
+app.use(cors()); 
 const authRoutes = require('./routes/routes');
 app.use('/routes', authRoutes);
 app.listen(3000, () => {
