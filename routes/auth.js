@@ -37,6 +37,13 @@ client.connect((err) => {
   console.log('Connecté à la base de données MongoDB');
 });
 
+
+
+app.get('/', (req, res) => {
+  res.status(300).redirect('/index.html');
+});
+
+
 app.post('/register', async (req, res) => {
   const {
     username,
