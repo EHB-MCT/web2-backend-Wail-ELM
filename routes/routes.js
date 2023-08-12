@@ -95,7 +95,7 @@ app.post('/register', async (req, res) => {
     });
 
     res.status(200).json({
-      message: 'Inscription réussie',
+      message: 'Successful registration',
       userId
     });
   } catch (error) {
